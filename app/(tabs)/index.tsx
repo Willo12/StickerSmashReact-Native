@@ -1,15 +1,15 @@
-import { View, StyleSheet, } from "react-native";
+import Button from '@/components/Button';
+import CircleButton from "@/components/CircleButton";
+import EmojiList from "@/components/EmojiList";
+import EmojiPicker from "@/components/EmojiPicker";
+import EmojiSticker from "@/components/EmojiSticker";
+import IconButton from "@/components/IconButton";
 import ImageViewer from '@/components/ImageViewer';
-import Button from '@/components/Button'
+import { type ImageSource } from "expo-image";
 import * as ImagePicker from 'expo-image-picker';
 import { useState } from "react";
-import IconButton from "@/components/IconButton";
-import CircleButton from "@/components/CircleButton";
-import EmojiPicker from "@/components/EmojiPicker";
-import { type ImageSource } from "expo-image";
-import EmojiList from "@/components/EmojiList";
-import { Image } from "react-native-reanimated/lib/typescript/Animated";
-import EmojiSticker from "@/components/EmojiSticker";
+import { StyleSheet, View, } from "react-native";
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
 
 const PlaceHolderImage = require('@/assets/images/background-image.png');
@@ -53,11 +53,8 @@ export default function Index() {
     // later
   };
 
-
-
-
   return (
-    <View style={styles.container}>
+    <GestureHandlerRootView style={styles.container}>
       <View style={styles.imageContainer}>
         <ImageViewer imgSource={PlaceHolderImage} selectedImage={selectedImage} />
         {pickedEmoji && <EmojiSticker imageSize={40} stickerSource={pickedEmoji} />}
@@ -71,8 +68,6 @@ export default function Index() {
           </View>
         </View>
       ) : (
-
-
         <View style={styles.footerContainer}>
           <Button theme="primary" label="Choose a photo" onPress={pickImageAsync} />
           <Button label="Use this photo" onPress={() => setShowAppOptions(true)} />
@@ -81,10 +76,9 @@ export default function Index() {
       <EmojiPicker isVisible={isModalVisible} onClose={onModalClose}>
         <EmojiList onSelect={setPickedEmoji} onCloseModal={onModalClose} />
       </EmojiPicker>
-    </View>
+    </GestureHandlerRootView>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {
